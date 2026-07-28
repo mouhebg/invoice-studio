@@ -1,4 +1,4 @@
-import { getChatGPTUser } from "../../chatgpt-auth";
+import { getUser } from "../../auth";
 import { createId, ensureAccount } from "../../../db/queries";
 import { getDb } from "../../../db";
 import { and, eq } from "drizzle-orm";
@@ -13,7 +13,7 @@ type InvoiceItemInput = {
 };
 
 export async function POST(request: Request) {
-  const user = await getChatGPTUser();
+  const user = await getUser();
   if (!user) return Response.json({ error: "Unauthorized" }, { status: 401 });
   const payload = (await request.json()) as Record<string, unknown> & {
     items?: InvoiceItemInput[];
