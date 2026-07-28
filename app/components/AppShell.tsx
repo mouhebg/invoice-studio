@@ -1,13 +1,13 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
-import type { ChatGPTUser } from "../chatgpt-auth";
-import { chatGPTSignOutPath } from "../chatgpt-auth";
+import type { InvoicyUser } from "../auth";
+import { signOutPath } from "../auth";
 import { BrandMark } from "./BrandMark";
 
 type AppShellProps = {
   active: "dashboard" | "invoices" | "clients" | "settings";
   children: ReactNode;
-  user: ChatGPTUser;
+  user: InvoicyUser;
   businessName: string;
 };
 
@@ -61,7 +61,7 @@ export function AppShell({
             <strong>{user.displayName}</strong>
             <small>{user.email}</small>
           </div>
-          <Link href={chatGPTSignOutPath("/")}>Sign out</Link>
+          <Link href={signOutPath("/")}>Sign out</Link>
         </div>
       </aside>
 
