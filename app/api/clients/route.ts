@@ -1,10 +1,10 @@
-import { getChatGPTUser } from "../../chatgpt-auth";
+import { getUser } from "../../auth";
 import { createId, ensureAccount, getClients } from "../../../db/queries";
 import { getDb } from "../../../db";
 import { clients } from "../../../db/schema";
 
 export async function GET() {
-  const user = await getChatGPTUser();
+  const user = await getUser();
   if (!user) return Response.json({ error: "Unauthorized" }, { status: 401 });
   const account = await ensureAccount({
     email: user.email,
@@ -14,7 +14,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  const user = await getChatGPTUser();
+  const user = await getUser();
   if (!user) return Response.json({ error: "Unauthorized" }, { status: 401 });
 
   const payload = (await request.json()) as Record<string, unknown>;
