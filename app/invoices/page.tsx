@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { requireChatGPTUser } from "../chatgpt-auth";
+import { requireUser } from "../auth";
 import { AppShell } from "../components/AppShell";
 import {
   ensureAccount,
@@ -16,7 +16,7 @@ import {
 export const dynamic = "force-dynamic";
 
 export default async function InvoicesPage() {
-  const user = await requireChatGPTUser("/invoices");
+  const user = await requireUser("/invoices");
   const account = await ensureAccount({
     email: user.email,
     name: user.fullName,
