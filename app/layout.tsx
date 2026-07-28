@@ -19,9 +19,6 @@ export const metadata: Metadata = {
   },
   description:
     "Create professional invoices, manage clients, and stay on top of what your business is owed.",
-  other: {
-    "codex-preview": "development",
-  },
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",
