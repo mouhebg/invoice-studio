@@ -1,4 +1,4 @@
-import { requireChatGPTUser } from "../../chatgpt-auth";
+import { requireUser } from "../../auth";
 import { AppShell } from "../../components/AppShell";
 import { InvoiceForm } from "../../components/InvoiceForm";
 import {
@@ -17,7 +17,7 @@ function addDays(value: string, days: number) {
 }
 
 export default async function NewInvoicePage() {
-  const user = await requireChatGPTUser("/invoices/new");
+  const user = await requireUser("/invoices/new");
   const account = await ensureAccount({
     email: user.email,
     name: user.fullName,
