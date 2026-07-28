@@ -1,8 +1,5 @@
 import Link from "next/link";
-import {
-  chatGPTSignInPath,
-  getChatGPTUser,
-} from "./chatgpt-auth";
+import { getUser } from "./auth";
 import { BrandMark } from "./components/BrandMark";
 
 export const dynamic = "force-dynamic";
@@ -26,8 +23,8 @@ const features = [
 ];
 
 export default async function Home() {
-  const user = await getChatGPTUser();
-  const primaryHref = user ? "/dashboard" : chatGPTSignInPath("/dashboard");
+  const user = await getUser();
+  const primaryHref = user ? "/dashboard" : "#features";
 
   return (
     <main className="marketing-page">
@@ -43,7 +40,7 @@ export default async function Home() {
           <a href="#features">Features</a>
           <a href="#security">Security</a>
           <Link href={primaryHref} className="button button-secondary">
-            {user ? "Open dashboard" : "Sign in"}
+            {user ? "Open dashboard" : "Explore platform"}
           </Link>
         </nav>
       </header>
@@ -60,7 +57,7 @@ export default async function Home() {
           </p>
           <div className="hero-actions">
             <Link href={primaryHref} className="button button-primary">
-              {user ? "Go to dashboard" : "Create your account"}
+              {user ? "Go to dashboard" : "Explore Invoicy"}
             </Link>
             <a href="#features" className="text-link">
               Explore the platform
