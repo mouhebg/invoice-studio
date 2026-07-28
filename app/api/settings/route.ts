@@ -1,5 +1,5 @@
 import { eq } from "drizzle-orm";
-import { getChatGPTUser } from "../../chatgpt-auth";
+import { getUser } from "../../auth";
 import { ensureAccount } from "../../../db/queries";
 import { getDb } from "../../../db";
 import { accounts } from "../../../db/schema";
@@ -7,7 +7,7 @@ import { accounts } from "../../../db/schema";
 const allowedCurrencies = new Set(["CAD", "USD", "EUR", "GBP", "TND"]);
 
 export async function PATCH(request: Request) {
-  const user = await getChatGPTUser();
+  const user = await getUser();
   if (!user) return Response.json({ error: "Unauthorized" }, { status: 401 });
   const payload = (await request.json()) as Record<string, unknown>;
   const businessName = String(payload.businessName || "").trim();
