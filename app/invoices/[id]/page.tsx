@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { requireChatGPTUser } from "../../chatgpt-auth";
+import { requireUser } from "../../auth";
 import { AppShell } from "../../components/AppShell";
 import { InvoiceActions } from "../../components/InvoiceActions";
 import {
@@ -21,7 +21,7 @@ export default async function InvoiceDetailPage({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const user = await requireChatGPTUser(`/invoices/${id}`);
+  const user = await requireUser(`/invoices/${id}`);
   const account = await ensureAccount({
     email: user.email,
     name: user.fullName,
