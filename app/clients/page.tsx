@@ -1,4 +1,4 @@
-import { requireChatGPTUser } from "../chatgpt-auth";
+import { requireUser } from "../auth";
 import { AppShell } from "../components/AppShell";
 import { ClientCreateForm } from "../components/ClientCreateForm";
 import { ensureAccount, getClients } from "../../db/queries";
@@ -6,7 +6,7 @@ import { ensureAccount, getClients } from "../../db/queries";
 export const dynamic = "force-dynamic";
 
 export default async function ClientsPage() {
-  const user = await requireChatGPTUser("/clients");
+  const user = await requireUser("/clients");
   const account = await ensureAccount({
     email: user.email,
     name: user.fullName,
