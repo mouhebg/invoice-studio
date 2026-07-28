@@ -54,20 +54,25 @@ Generate a new database migration after changing `db/schema.ts`:
 npm run db:generate
 ```
 
-## Hosting
+## Deployment
 
 The application uses server-rendered routes, authenticated account pages, and a
 relational database. It therefore requires a full-stack host and cannot run as a
-static GitHub Pages website.
+static GitHub Pages application. GitHub Pages serves the public product website,
+while the account workspace is deployed separately.
 
-The public repository contains `.openai/hosting.example.json`. Copy it to
-`.openai/hosting.json` and replace the placeholder with your own Sites project
-identifier when configuring another deployment. The active production
-identifier is intentionally not stored in the public repository.
+The full application expects:
 
-Current hosted release:
+- A Cloudflare D1 database bound as `DB`
+- A trusted authentication gateway that removes client-supplied identity
+  headers before adding verified user information
+- The verified email header `x-invoicy-user-email`
+- The optional display-name header `x-invoicy-user-name`
+- Deployment-specific `/login` and `/logout` routes
 
-<https://invoicy.mouheb.chatgpt.site>
+Header names and authentication paths can be changed with
+`INVOICY_USER_EMAIL_HEADER`, `INVOICY_USER_NAME_HEADER`,
+`INVOICY_SIGN_IN_PATH`, and `INVOICY_SIGN_OUT_PATH`.
 
 The production domain is intended to be `invoicy.ca`.
 
